@@ -4,7 +4,7 @@ using System.Text;
 
 namespace VogCodeChallenge.Entities
 {
-    public class Department : EntityBase
+    public class Department : EntityBase, IEntityBase
     {
     }
 }
