@@ -28,6 +28,13 @@ namespace VogCodeChallenge.API
         {
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddControllers();
+            services.AddSwaggerGen(setupAction =>
+            {
+                setupAction.SwaggerDoc("AppOpenAPISpecification",
+                    new Microsoft.OpenApi.Models.OpenApiInfo() { 
+                        Title = "App API", Version="1"
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +46,8 @@ namespace VogCodeChallenge.API
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
 
             app.UseRouting();
 
