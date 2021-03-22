@@ -6,6 +6,8 @@ namespace VogCodeChallenge.Entities
 {
     public class Department : EntityBase, IEntityBase, IEquatable<Department>
     {
+        public string Name { get; set; }
+
         public virtual ICollection<Employee> Employees { get; set; }
 
         public Department()
