@@ -13,6 +13,8 @@ namespace VogCodeChallenge.Entities
 
         public int DepartmentId { get; set; }
 
+        public Department Department { get; set; }
+
         public bool Equals([AllowNull] Employee other)
         {
             return other != null && Id == other.Id;
