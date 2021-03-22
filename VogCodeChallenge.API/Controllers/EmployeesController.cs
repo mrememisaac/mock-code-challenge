@@ -29,7 +29,7 @@ namespace VogCodeChallenge.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Employee>> Get() 
+        public ActionResult Get() 
         {
             try
             {
