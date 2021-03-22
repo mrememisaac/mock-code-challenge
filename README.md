@@ -1,5 +1,8 @@
 ﻿# Branches
 
+## step-7 branch
+Please see the [readme](./VogCodeChallenge.ConsoleApp/README.md) in the console app project
+
 ## step-6
 Imagine we are connected to the Database now. We�d like to switch from in Memory implementation of Employee service to the database implementation. Suggest and apply a way to switch from your previous implementation to the new one and consider the methods you implemented before. IEnumerable<Employee> GetAll() and IList<Employee> ListAll() ** Database and Entity Framework implementation is not required
 
