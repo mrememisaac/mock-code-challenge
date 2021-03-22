@@ -17,6 +17,12 @@ namespace VogCodeChallenge.Services
             _employees = CreateSampleEmployees(_departments);
         }
 
+        public EmployeeService(List<Employee> employees, List<Department> departments)
+        {
+            _departments = departments;
+            _employees = employees;
+        }
+
         public IEnumerable GetAll()
         {
             return Query();
