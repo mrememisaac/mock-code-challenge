@@ -4,7 +4,7 @@
 Please see the [readme](./VogCodeChallenge.ConsoleApp/README.md) in the console app project
 
 ## step-6
-Imagine we are connected to the Database now. We�d like to switch from in Memory implementation of Employee service to the database implementation. Suggest and apply a way to switch from your previous implementation to the new one and consider the methods you implemented before. IEnumerable<Employee> GetAll() and IList<Employee> ListAll() ** Database and Entity Framework implementation is not required
+Imagine we are connected to the Database now. We'd like to switch from in Memory implementation of Employee service to the database implementation. Suggest and apply a way to switch from your previous implementation to the new one and consider the methods you implemented before. IEnumerable<Employee> GetAll() and IList<Employee> ListAll() ** Database and Entity Framework implementation is not required
 
 ### Suggestion
 Since we used an interface. We just need a new class that implements that interface but unlike the current one, 
@@ -185,9 +185,9 @@ public class EFEmployeeService : IEmployeeService
 
 ### Application
 
-Question 6 said "sugget and apply". The apply part involved the creation of a Data Project. See it's [README](./VogCodeChallenge.Data/README.md) for more information. Another chunk of the "apply" is detailed in step-6 of the [Service Project README](./VogCodeChallenge.Services) where I create a new implementation of IEmployeeService.
+Question 6 said "suggest and apply". The apply part involved the creation of a Data Project. See it's [README](./VogCodeChallenge.Data/README.md) for more information. Another chunk of the "apply" is detailed in step-6 of the [Service Project README](./VogCodeChallenge.Services) where I create a new implementation of IEmployeeService.
 
-To complete the switch to using ab EF database we would have to add a connection string to the appsettings.json file in the API project
+To complete the switch to using an EF database we would have to add a connection string to the appsettings.json file in the API project
 
 ```	
 	"ConnectionStrings": {
