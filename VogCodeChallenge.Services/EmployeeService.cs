@@ -39,7 +39,8 @@ namespace VogCodeChallenge.Services
                        FirstName = employee.FirstName,
                        LastName = employee.LastName,
                        JobTitle = employee.JobTitle,
-                       Address = employee.Address
+                       Address = employee.Address, 
+                       Department = department
                    };
         } 
 
