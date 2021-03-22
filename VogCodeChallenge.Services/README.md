@@ -1,7 +1,22 @@
 ﻿# Service Project
+The EmployeeService and the IEmployeeService live here
 
-Added in step-3, this contains the EmployeeService and the IEmployeeService. I added a helper Query function to 
-do the heavy lifting for GetAll and ListAll. That way, we reduce code duplication.
+## step-6
+
+The following changes are required to fulfill the requirements in step-6
+
+1.    Reference the VogCodeChallenge.Data project from the VogCodeChallenge.Services project
+2.    Create a new EmployeeService class, let's call it EFEmployeeService - the EF meaning Entity Framework. It must implement the interface IEmployee
+3.    Add a readonly field of type DbSet<Employee>. We'll call it _employees.
+3.    Add a readonly field of type DbSet<Departments>. We'll call it _departments.
+4.    Provide a constructor that accepts a dbContext
+5.    In the constructor method, do this
+          a. _departments = dbContext.Departments
+          b. _employees = dbContext.Employees
+          c. Create a Query() method with a return type of IQueryAble<Employee>
+          d. Create a GetAll() method that simply returns All().AsEnumerable();
+          e. Create a ListAll() method that simply returns All().ToList();
+
 
 ## step-4
 
@@ -132,3 +147,6 @@ The remaining methods are for generating sample data
         };
     }
 ```
+
+## step-3
+Created the services project. And the Employee Service class and its interface. Also added a custom helper method - Query to do the heavy lifting for GetAll and ListAll. That way, we reduce code duplication.
