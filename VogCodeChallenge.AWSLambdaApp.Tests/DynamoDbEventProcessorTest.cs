@@ -16,7 +16,7 @@ using VogCodeChallenge.AWSLambdaApp;
 
 namespace VogCodeChallenge.AWSLambdaApp.Tests
 {
-    public class FunctionTest
+    public class DynamoDbEventProcessorTest
     {
         [Fact]
         public void TestFunction()
@@ -42,9 +42,9 @@ namespace VogCodeChallenge.AWSLambdaApp.Tests
 
 
             var context = new TestLambdaContext();
-            var function = new Function();
+            var function = new DynamoDbEventProcessor();
 
-            function.FunctionHandler(evnt, context);
+            function.Process(evnt, context);
 
             var testLogger = context.Logger as TestLambdaLogger;
 			Assert.Contains("Stream processing complete", testLogger.Buffer.ToString());

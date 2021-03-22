@@ -11,9 +11,9 @@ using Amazon.DynamoDBv2.Model;
 
 namespace VogCodeChallenge.AWSLambdaApp
 {
-    public class Function
+    public class DynamoDbEventProcessor
     {
-        public void FunctionHandler(DynamoDBEvent dynamoEvent, ILambdaContext context)
+        public void Process(DynamoDBEvent dynamoEvent, ILambdaContext context)
         {
             context.Logger.LogLine($"Beginning to process {dynamoEvent.Records.Count} records...");
 
