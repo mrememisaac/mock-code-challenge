@@ -6,7 +6,7 @@ namespace VogCodeChallenge.ConsoleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            QuestionClass.Iterate();
         }
     }
 }
