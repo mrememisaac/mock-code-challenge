@@ -27,7 +27,7 @@ namespace VogCodeChallenge.Services
             throw new NotImplementedException();
         }
 
-        private IEnumerable Query()
+        private IEnumerable<Employee> Query()
         {
             return from employee in _employees
                    join department in _departments
