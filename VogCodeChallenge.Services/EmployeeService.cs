@@ -24,7 +24,7 @@ namespace VogCodeChallenge.Services
 
         public IList ListAll()
         {
-            throw new NotImplementedException();
+            return Query().ToList();
         }
 
         private IEnumerable<Employee> Query()
