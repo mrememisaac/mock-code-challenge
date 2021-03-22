@@ -27,6 +27,22 @@ namespace VogCodeChallenge.Services
             throw new NotImplementedException();
         }
 
+        private IEnumerable Query()
+        {
+            return from employee in _employees
+                   join department in _departments
+                   on employee.DepartmentId equals department.Id
+                   select new Employee
+                   {
+                       Id = employee.Id,
+                       DepartmentId = employee.DepartmentId,
+                       FirstName = employee.FirstName,
+                       LastName = employee.LastName,
+                       JobTitle = employee.JobTitle,
+                       Address = employee.Address
+                   };
+        } 
+
         private List<Department> CreateSampleDepartments()
         {
             return new List<Department>
