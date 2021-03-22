@@ -39,7 +39,7 @@ namespace VogCodeChallenge.Services
 
         public IEnumerable GetAll()
         {
-            throw new NotImplementedException();
+            return Query().AsEnumerable();
         }
 
         public EmployeesApiViewModel GetAll(int page, int recordsPerPage)
