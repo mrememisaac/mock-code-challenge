@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Text;
 
 namespace VogCodeChallenge.Entities
 {
@@ -17,7 +15,7 @@ namespace VogCodeChallenge.Entities
         {
             return other != null && Id == other.Id;
         }
-        
+
         public override bool Equals(object obj)
         {
             return obj is Employee e && Equals(e);
