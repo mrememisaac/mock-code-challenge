@@ -1,5 +1,5 @@
 ﻿# Service Project
-The EmployeeService and the IEmployeeService live here
+The EmployeeService, EFEmployeeService and the IEmployeeService live here
 
 ## step-6
 
@@ -13,10 +13,77 @@ The following changes are required to fulfill the requirements in step-6
 5.    In the constructor method, do this
           a. _departments = dbContext.Departments
           b. _employees = dbContext.Employees
-          c. Create a Query() method with a return type of IQueryAble<Employee>
-          d. Create a GetAll() method that simply returns All().AsEnumerable();
-          e. Create a ListAll() method that simply returns All().ToList();
+          c. Create a Query() method with a return type of Task<IQueryAble<Employee>>
+          d. Create a GetAll() method that returns Query().Result.AsEnumerable();
+          e. Create a ListAll() method that returns Query().Result.ToList();
+          f. Create a GetEmployeesByDepartment method that returns Task<List<Employee>>
+          g. Create a GetAll(page, recordsPerpage) method that returns Task<EmployeeApiViewModel>
 
+Now that we will be working databases, I have modified the IEmployee interface and Employee Service to return Task types, resulting in v4.1, v5.1
+
+### EFEmployeeService
+```
+    public class EFEmployeeService : IEmployeeService
+    {
+        private readonly DbSet<Employee> _employees;
+        private readonly DbSet<Department> _departments;
+
+        public EFEmployeeService(AppDbContext context)
+        {
+            _employees = context.Employees;
+            _departments = context.Departments;
+        }
+
+        private Task<IQueryable<Employee>> Query()
+        {
+            return Task.Run(() => from employee in _employees
+                   join department in _departments
+                   on employee.DepartmentId equals department.Id
+                   select new Employee
+                   {
+                       Id = employee.Id,
+                       DepartmentId = employee.DepartmentId,
+                       FirstName = employee.FirstName,
+                       LastName = employee.LastName,
+                       JobTitle = employee.JobTitle,
+                       Address = employee.Address,
+                       Department = department
+                   });
+        }
+
+        public IEnumerable GetAll()
+        {
+            return Query().Result.AsEnumerable();
+        }
+
+        public Task<EmployeesApiViewModel> GetAll(int page = 0, int recordsPerPage = 50)
+        {
+            //we dont want to send more than 250 records at time, TODO: make this configurable
+            recordsPerPage = Math.Min(recordsPerPage, 250);
+            return Task.FromResult(new EmployeesApiViewModel
+            {
+                Data = Query().Result.Skip(page * recordsPerPage).Take(recordsPerPage).ToList(),
+                Page = page,
+                RecordsPerPage = recordsPerPage,
+                TotalRecordCount = _employees.Count()
+            });
+        }
+
+        public Task<List<Employee>> GetEmployeesByDepartment(int departmentId)
+        {
+            var result = Task
+                .Run(
+                    () => Query().Result.Where(employee => employee.DepartmentId == departmentId).ToList()
+                );
+            return result;
+        }
+
+        public IList ListAll()
+        {
+            return Query().Result.ToList();
+        }
+    }
+```
 
 ## step-4
 
