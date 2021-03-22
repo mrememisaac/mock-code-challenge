@@ -4,12 +4,7 @@ using System.Text;
 
 namespace VogCodeChallenge.Entities
 {
-    public class Department
+    public class Department : EntityBase
     {
-        public int Id { get; set; }
-
-        public string Name { get; set; }
-
-        public string Address { get; set; }
     }
 }
