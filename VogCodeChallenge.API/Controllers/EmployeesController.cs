@@ -33,7 +33,8 @@ namespace VogCodeChallenge.API.Controllers
         {
             try
             {
-                return Ok(_employeeService.GetAll());
+                //TODO: read the page and number of records from the caller
+                return Ok(_employeeService.GetAll(page:0, recordsPerPage:50));
             }
             catch (Exception e)
             {
