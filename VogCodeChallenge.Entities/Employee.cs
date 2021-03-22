@@ -17,5 +17,15 @@ namespace VogCodeChallenge.Entities
         {
             return other != null && this.Id == other.Id;
         }
+        
+        public override bool Equals(object obj)
+        {
+            return obj is Employee e && Equals(e);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
