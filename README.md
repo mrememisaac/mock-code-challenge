@@ -12,7 +12,7 @@ and configured the API project to source an IEmployeeService from EmployeeServic
 Created a new method for getting employees by department and another for getting a paged set of employees. For more information, See the section titled [Changes in step 4](./VogCodeChallenge.Services/README.md)
 
 ### Changes to the Test Project
-Added a test that verifies that the service can filter employees by department and another test that verifies that the service can provide a paged list of employees. For more information, See the section titled [Changes in step 4](./VogCodeChallenge.Tests/README.md)
+Added a test that verifies that the service can filter employees by department and another that verifies that the service can provide a paged list of employees. For more information, See the section titled [Changes in step 4](./VogCodeChallenge.Tests/README.md)
 
 ## step-3
 Created a class library [Service Project](./VogCodeChallenge.Services/README.md) to house our Services and an [xUnit Test Project](./VogCodeChallenge.Tests/README.md) to verify Service behaviour. 
