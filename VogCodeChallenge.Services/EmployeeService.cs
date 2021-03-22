@@ -81,5 +81,10 @@ namespace VogCodeChallenge.Services
         {
             return Query().Where(employee => employee.DepartmentId == departmentId).ToList();
         }
+
+        public IList<Employee> GetAll(int page = 0, int recordsPerPage = 50)
+        {
+            return Query().Take(recordsPerPage).Skip(page*recordsPerPage).ToList();
+        }
     }
 }
