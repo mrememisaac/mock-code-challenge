@@ -20,5 +20,14 @@ namespace VogCodeChallenge.Services
         {
             throw new NotImplementedException();
         }
+
+        private List<Department> CreateSampleDepartments()
+        {
+            return new List<Department>
+            {
+                new Department{ Id = 1, Name ="Engineering", Address = "Developers Avenue"},
+                new Department{ Id=2, Name="Sales", Address="Sales Drive"}
+            };
+        }
     }
 }
