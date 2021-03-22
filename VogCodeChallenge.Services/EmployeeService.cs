@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using VogCodeChallenge.Entities;
@@ -45,10 +44,10 @@ namespace VogCodeChallenge.Services
                        FirstName = employee.FirstName,
                        LastName = employee.LastName,
                        JobTitle = employee.JobTitle,
-                       Address = employee.Address, 
+                       Address = employee.Address,
                        Department = department
                    };
-        } 
+        }
 
         private List<Department> CreateSampleDepartments()
         {
@@ -65,7 +64,7 @@ namespace VogCodeChallenge.Services
             {
                 new Employee
                 {
-                    Id =1, FirstName = "Emem", LastName="Isaac", JobTitle="Software Engineer", Address="4th Avenue", DepartmentId = departments.First().Id 
+                    Id =1, FirstName = "Emem", LastName="Isaac", JobTitle="Software Engineer", Address="4th Avenue", DepartmentId = departments.First().Id
                 },
                 new Employee
                 {
