@@ -11,6 +11,12 @@ namespace VogCodeChallenge.Services
         private readonly List<Department> _departments;
         private readonly List<Employee> _employees;
 
+        public EmployeeService()
+        {
+            _departments = CreateSampleDepartments();
+            _employees = CreateSampleEmployees(_departments);
+        }
+
         public IEnumerable GetAll()
         {
             throw new NotImplementedException();
