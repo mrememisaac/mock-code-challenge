@@ -23,5 +23,10 @@ namespace VogCodeChallenge.Entities
         {
             return obj is Department department && Equals(department);
         }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
