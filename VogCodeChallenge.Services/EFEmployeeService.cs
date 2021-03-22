@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using VogCodeChallenge.Data;
 using VogCodeChallenge.Entities;
 
@@ -20,9 +21,9 @@ namespace VogCodeChallenge.Services
             _departments = context.Departments;
         }
 
-        private IQueryable<Employee> Query()
+        private Task<IQueryable<Employee>> Query()
         {
-            return from employee in _employees
+            return Task.Run(() => from employee in _employees
                    join department in _departments
                    on employee.DepartmentId equals department.Id
                    select new Employee
@@ -34,27 +35,39 @@ namespace VogCodeChallenge.Services
                        JobTitle = employee.JobTitle,
                        Address = employee.Address,
                        Department = department
-                   };
+                   });
         }
 
         public IEnumerable GetAll()
         {
-            return Query().AsEnumerable();
+            return Query().Result.AsEnumerable();
         }
 
-        public EmployeesApiViewModel GetAll(int page, int recordsPerPage)
+        public Task<EmployeesApiViewModel> GetAll(int page = 0, int recordsPerPage = 50)
         {
-            throw new NotImplementedException();
+            //we dont want to send more than 250 records at time, TODO: make this configurable
+            recordsPerPage = Math.Min(recordsPerPage, 250);
+            return Task.FromResult(new EmployeesApiViewModel
+            {
+                Data = Query().Result.Skip(page * recordsPerPage).Take(recordsPerPage).ToList(),
+                Page = page,
+                RecordsPerPage = recordsPerPage,
+                TotalRecordCount = _employees.Count()
+            });
         }
 
-        public IList<Employee> GetEmployeesByDepartment(int departmentId)
+        public Task<List<Employee>> GetEmployeesByDepartment(int departmentId)
         {
-            throw new NotImplementedException();
+            var result = Task
+                .Run(
+                    () => Query().Result.Where(employee => employee.DepartmentId == departmentId).ToList()
+                );
+            return result;
         }
 
         public IList ListAll()
         {
-            throw new NotImplementedException();
+            return Query().Result.ToList();
         }
     }
 }
