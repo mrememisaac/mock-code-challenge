@@ -2,9 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using VogCodeChallenge.Entities;
 using VogCodeChallenge.Services;
 
@@ -29,7 +26,7 @@ namespace VogCodeChallenge.API.Controllers
         }
 
         [HttpGet()]
-        public ActionResult Get(int page, int recordsPerPage = 50) 
+        public ActionResult Get(int page, int recordsPerPage = 50)
         {
             try
             {
