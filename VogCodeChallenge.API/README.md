@@ -26,11 +26,11 @@ The default Get action calls  GetAll(page, recordsPerPage) of the EmployeeServic
         }
 
         [HttpGet()]
-        public ActionResult Get(int page, int recordsPerPage = 50)
+        public async Task<ActionResult<EmployeesApiViewModel>> Get(int page, int recordsPerPage = 50)
         {
             try
             {
-                return Ok(_employeeService.GetAll(page, recordsPerPage));
+                return Ok(await _employeeService.GetAll(page, recordsPerPage));
             }
             catch (Exception e)
             {
@@ -41,18 +41,18 @@ The default Get action calls  GetAll(page, recordsPerPage) of the EmployeeServic
 
 
         [HttpGet("department/{departmentId:int}")]
-        public ActionResult<Employee> Get(int departmentId)
+        public async Task<ActionResult<Employee>> Get(int departmentId)
         {
             try
             {
-                return Ok(_employeeService.GetEmployeesByDepartment(departmentId));
+                return Ok(await _employeeService.GetEmployeesByDepartment(departmentId));
             }
             catch (Exception e)
             {
                 _logger.LogError(e.Message, e);
                 return ServerError();
             }
-        }
+        }        
     }
 ```
 

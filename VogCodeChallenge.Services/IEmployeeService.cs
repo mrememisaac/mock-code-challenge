@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using VogCodeChallenge.Entities;
 
 namespace VogCodeChallenge.Services
@@ -10,7 +11,8 @@ namespace VogCodeChallenge.Services
 
         IList ListAll();
 
-        IList<Employee> GetEmployeesByDepartment(int departmentId);
-        EmployeesApiViewModel GetAll(int page, int recordsPerPage);
+        Task<List<Employee>> GetEmployeesByDepartment(int departmentId);
+
+        Task<EmployeesApiViewModel> GetAll(int page, int recordsPerPage);
     }
 }
