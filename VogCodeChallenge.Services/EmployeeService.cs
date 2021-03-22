@@ -19,7 +19,7 @@ namespace VogCodeChallenge.Services
 
         public IEnumerable GetAll()
         {
-            throw new NotImplementedException();
+            return Query();
         }
 
         public IList ListAll()
