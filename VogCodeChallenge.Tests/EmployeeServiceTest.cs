@@ -38,7 +38,7 @@ namespace VogCodeChallenge.Tests
             var employees = CreateEmployeeSampleData(departments);
 
             IEmployeeService sut = new EmployeeService(employees, departments);
-            var result = sut.GetAll(page, recordsPerPage);
+            var result = sut.GetAll(page, recordsPerPage).Result;
 
             Assert.Equal(result.Data.Count, count);
         }
@@ -53,7 +53,7 @@ namespace VogCodeChallenge.Tests
 
             IEmployeeService sut = new EmployeeService(employees, departments);
             var result = sut.GetEmployeesByDepartment(departmentId);
-            var hasEmployeeFromAnotherDepartment = result.Any(x => x.DepartmentId != departmentId);
+            var hasEmployeeFromAnotherDepartment = result.Result.Any(x => x.DepartmentId != departmentId);
 
             Assert.False(hasEmployeeFromAnotherDepartment);
         }
