@@ -28,13 +28,12 @@ namespace VogCodeChallenge.API.Controllers
             return StatusCode(StatusCodes.Status500InternalServerError, message);
         }
 
-        [HttpGet]
-        public ActionResult Get() 
+        [HttpGet()]
+        public ActionResult Get(int page, int recordsPerPage = 50) 
         {
             try
             {
-                //TODO: read the page and number of records from the caller
-                return Ok(_employeeService.GetAll(page:0, recordsPerPage:50));
+                return Ok(_employeeService.GetAll(page, recordsPerPage));
             }
             catch (Exception e)
             {
