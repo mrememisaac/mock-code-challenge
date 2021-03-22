@@ -9,6 +9,8 @@ namespace VogCodeChallenge.Entities
 
         public string LastName { get; set; }
 
+        public string JobTitle { get; set; }
+
         public int DepartmentId { get; set; }
 
         public bool Equals([AllowNull] Employee other)
