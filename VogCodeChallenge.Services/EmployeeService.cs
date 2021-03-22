@@ -2,11 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using VogCodeChallenge.Entities;
 
 namespace VogCodeChallenge.Services
 {
     public class EmployeeService : IEmployeeService
     {
+        private readonly List<Department> _departments;
+        private readonly List<Employee> _employees;
+
         public IEnumerable GetAll()
         {
             throw new NotImplementedException();
