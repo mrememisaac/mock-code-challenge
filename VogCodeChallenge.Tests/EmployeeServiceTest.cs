@@ -24,6 +24,25 @@ namespace VogCodeChallenge.Tests
             Assert.Equal(employees.Count, iListResult.Count);
         }
 
+
+        [Theory]
+        [InlineData(0, 1, 1)] //page 0, records 1, count should be 1
+        [InlineData(0, 2, 2)] //page 0, records 2, count should be 2
+        [InlineData(0, 3, 3)] //page 0, records 3, count should be 3
+        [InlineData(1, 3, 0)] //page 1, records 3, count should be 0
+        [InlineData(1, 2, 1)] //page 1, records 2, count should be 1
+        [InlineData(10, 2, 0)] //page 1, records 2, count should be 1
+        public void Can_list_employees_in_pages_of_specified_size(int page, int recordsPerPage, int count)
+        {
+            var departments = CreateDepartmentSampleData();
+            var employees = CreateEmployeeSampleData(departments);
+
+            IEmployeeService sut = new EmployeeService(employees, departments);
+            var result = sut.GetAll(page, recordsPerPage);
+
+            Assert.Equal(result.Data.Count, count);
+        }
+
         private List<Department> CreateDepartmentSampleData()
         {
             return new List<Department>
