@@ -83,16 +83,16 @@ namespace VogCodeChallenge.Services
             return Query().Where(employee => employee.DepartmentId == departmentId).ToList();
         }
 
-        public dynamic GetAll(int page = 0, int recordsPerPage = 50)
+        public EmployeesApiViewModel GetAll(int page = 0, int recordsPerPage = 50)
         {
             //we dont want to send more than 250 records at time, TODO: make this configurable
             recordsPerPage = Math.Min(recordsPerPage, 250);
-            return new
+            return new EmployeesApiViewModel
             {
-                Count = _employees.Count,
-                Data = Query().Take(recordsPerPage).Skip(page * recordsPerPage).ToList(),
+                Data = Query().Skip(page * recordsPerPage).Take(recordsPerPage).ToList(),
                 Page = page,
-                RecordsPerPage=recordsPerPage,
+                RecordsPerPage=recordsPerPage, 
+                TotalRecordCount = _employees.Count
             };
         }
     }
