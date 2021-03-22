@@ -76,5 +76,10 @@ namespace VogCodeChallenge.Services
                 },
             };
         }
+
+        public IList<Employee> GetEmployeesByDepartment(int departmentId)
+        {
+            return Query().Where(employee => employee.DepartmentId == departmentId).ToList();
+        }
     }
 }
