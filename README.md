@@ -1,5 +1,8 @@
 ﻿# Branches
 
+## step-8 branch
+Please see the [readme](./VogCodeChallenge.TESTModuleApp/README.md) in the console app project
+
 ## step-7 branch
 Please see the [readme](./VogCodeChallenge.ConsoleApp/README.md) in the console app project
 
