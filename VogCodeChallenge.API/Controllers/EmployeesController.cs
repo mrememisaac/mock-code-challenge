@@ -21,5 +21,10 @@ namespace VogCodeChallenge.API.Controllers
             _logger = logger;
             _employeeService = employeeService;
         }
+
+        private ObjectResult ServerError(string message = "Service unreachable")
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, message);
+        }
     }
 }
