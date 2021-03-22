@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using VogCodeChallenge.Entities;
 
 namespace VogCodeChallenge.Services
@@ -78,22 +79,26 @@ namespace VogCodeChallenge.Services
             };
         }
 
-        public IList<Employee> GetEmployeesByDepartment(int departmentId)
+        public Task<List<Employee>> GetEmployeesByDepartment(int departmentId)
         {
-            return Query().Where(employee => employee.DepartmentId == departmentId).ToList();
+            var result = Task
+                .Run(
+                    () => Query().Where(employee => employee.DepartmentId == departmentId).ToList()
+                );
+            return result;
         }
 
-        public EmployeesApiViewModel GetAll(int page = 0, int recordsPerPage = 50)
+        public Task<EmployeesApiViewModel> GetAll(int page = 0, int recordsPerPage = 50)
         {
             //we dont want to send more than 250 records at time, TODO: make this configurable
             recordsPerPage = Math.Min(recordsPerPage, 250);
-            return new EmployeesApiViewModel
+            return Task.FromResult(new EmployeesApiViewModel
             {
                 Data = Query().Skip(page * recordsPerPage).Take(recordsPerPage).ToList(),
                 Page = page,
                 RecordsPerPage=recordsPerPage, 
                 TotalRecordCount = _employees.Count
-            };
+            });
         }
     }
 }

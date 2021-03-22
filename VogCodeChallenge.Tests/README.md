@@ -15,7 +15,7 @@ Verifies that service can filter employees by department
 
         IEmployeeService sut = new EmployeeService(employees, departments);
         var result = sut.GetEmployeesByDepartment(departmentId);
-        var hasEmployeeFromAnotherDepartment = result.Any(x => x.DepartmentId != departmentId);
+        var hasEmployeeFromAnotherDepartment = result.Result.Any(x => x.DepartmentId != departmentId);
 
         Assert.False(hasEmployeeFromAnotherDepartment);
     }
@@ -37,7 +37,7 @@ Verifies that the service can returned a paged data set
             var employees = CreateEmployeeSampleData(departments);
 
             IEmployeeService sut = new EmployeeService(employees, departments);
-            var result = sut.GetAll(page, recordsPerPage);
+            var result = sut.GetAll(page, recordsPerPage).Result;
 
             Assert.Equal(result.Data.Count, count);
         }
