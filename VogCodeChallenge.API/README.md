@@ -2,7 +2,7 @@
 This is the WEB API component of the project. Where the API Controllers live.
 
 ## step-4
-The default Get action calls  GetAll(page, recordsPerPage) of the EmployeeService for scalability reasons. Similarly the call to GetEmployeeByDepartment in the action that handles the employees/department/departmentId route, will ensure we do the querying at the database level. I also added Swagger API documentation
+The default Get action calls  GetAll(page, recordsPerPage) of the EmployeeService for scalability reasons. Similarly the call to GetEmployeeByDepartment in the action that handles the employees/department/departmentId route, will ensure we do the querying at the database level. I also added Swagger API documentation available at https://localhost:44353/swagger/AppOpenAPISpecification/swagger.json
 
 
 ### Employees Controller
