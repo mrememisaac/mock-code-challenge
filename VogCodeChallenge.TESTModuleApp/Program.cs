@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 
 namespace VogCodeChallenge.TESTModuleApp
 {
@@ -6,7 +7,7 @@ namespace VogCodeChallenge.TESTModuleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            TestModule.Driver();
         }
     }
 }
