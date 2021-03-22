@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Threading.Tasks;
 using VogCodeChallenge.Entities;
 using VogCodeChallenge.Services;
 
@@ -26,11 +27,11 @@ namespace VogCodeChallenge.API.Controllers
         }
 
         [HttpGet()]
-        public ActionResult<EmployeesApiViewModel> Get(int page, int recordsPerPage = 50)
+        public async Task<ActionResult<EmployeesApiViewModel>> Get(int page, int recordsPerPage = 50)
         {
             try
             {
-                return Ok(_employeeService.GetAll(page, recordsPerPage));
+                return Ok(await _employeeService.GetAll(page, recordsPerPage));
             }
             catch (Exception e)
             {
@@ -41,11 +42,11 @@ namespace VogCodeChallenge.API.Controllers
 
 
         [HttpGet("department/{departmentId:int}")]
-        public ActionResult<Employee> Get(int departmentId)
+        public async Task<ActionResult<Employee>> Get(int departmentId)
         {
             try
             {
-                return Ok(_employeeService.GetEmployeesByDepartment(departmentId));
+                return Ok(await _employeeService.GetEmployeesByDepartment(departmentId));
             }
             catch (Exception e)
             {
