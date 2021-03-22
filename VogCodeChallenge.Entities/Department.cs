@@ -10,7 +10,8 @@ namespace VogCodeChallenge.Entities
 
         public Department()
         {
-            Employees = new List<Employee>();
+            //initialized so that we always have a ready to use(non-null) Employees property
+            Employees = new List<Employee>(); 
         }
 
         public bool Equals([AllowNull] Department other)
