@@ -5,10 +5,23 @@ VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{35C1F304-1CB9-48C6-95AF-E9EF9431792A}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VogCodeChallenge.API", "VogCodeChallenge.API\VogCodeChallenge.API.csproj", "{6E921C0A-7713-4B81-A9EA-E52A704269DB}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E921C0A-7713-4B81-A9EA-E52A704269DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E921C0A-7713-4B81-A9EA-E52A704269DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E921C0A-7713-4B81-A9EA-E52A704269DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E921C0A-7713-4B81-A9EA-E52A704269DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
