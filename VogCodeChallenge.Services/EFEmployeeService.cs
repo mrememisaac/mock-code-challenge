@@ -20,6 +20,23 @@ namespace VogCodeChallenge.Services
             _departments = context.Departments;
         }
 
+        private IQueryable<Employee> Query()
+        {
+            return from employee in _employees
+                   join department in _departments
+                   on employee.DepartmentId equals department.Id
+                   select new Employee
+                   {
+                       Id = employee.Id,
+                       DepartmentId = employee.DepartmentId,
+                       FirstName = employee.FirstName,
+                       LastName = employee.LastName,
+                       JobTitle = employee.JobTitle,
+                       Address = employee.Address,
+                       Department = department
+                   };
+        }
+
         public IEnumerable GetAll()
         {
             throw new NotImplementedException();
