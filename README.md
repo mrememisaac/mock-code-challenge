@@ -1,4 +1,4 @@
 # Branches
 
 ## step-1
-A .NET Web API Project, no custom code added
+Created a blank solution and added a .NET Web API Project
