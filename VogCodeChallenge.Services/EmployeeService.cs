@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using VogCodeChallenge.Entities;
@@ -82,9 +83,17 @@ namespace VogCodeChallenge.Services
             return Query().Where(employee => employee.DepartmentId == departmentId).ToList();
         }
 
-        public IList<Employee> GetAll(int page = 0, int recordsPerPage = 50)
+        public dynamic GetAll(int page = 0, int recordsPerPage = 50)
         {
-            return Query().Take(recordsPerPage).Skip(page*recordsPerPage).ToList();
+            //we dont want to send more than 250 records at time, TODO: make this configurable
+            recordsPerPage = Math.Min(recordsPerPage, 250);
+            return new
+            {
+                Count = _employees.Count,
+                Data = Query().Take(recordsPerPage).Skip(page * recordsPerPage).ToList(),
+                Page = page,
+                RecordsPerPage=recordsPerPage,
+            };
         }
     }
 }
