@@ -3,6 +3,8 @@
 Contains the solution to step-9
 
 ## Test Input
+
+```
 {
    "Records":[
       {
@@ -93,9 +95,11 @@ Contains the solution to step-9
       }
    ]
 }
+```
 
 ## Test Output
 
+```
 START RequestId: e6186867-af1c-4308-8898-0f550ef25cad Version: $LATEST
 Beginning to process 3 records...
 Event ID: 1
@@ -108,3 +112,4 @@ Stream processing complete.
 END RequestId: e6186867-af1c-4308-8898-0f550ef25cad
 REPORT RequestId: e6186867-af1c-4308-8898-0f550ef25cad	Duration: 378.93 ms	Billed Duration: 379 ms	Memory Size: 256 MB	Max Memory Used: 66 MB	Init Duration: 163.44 ms	
 
+```
