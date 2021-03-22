@@ -43,6 +43,21 @@ namespace VogCodeChallenge.Tests
             Assert.Equal(result.Data.Count, count);
         }
 
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        public void can_filter_employees_by_department(int departmentId)
+        {
+            var departments = CreateDepartmentSampleData();
+            var employees = CreateEmployeeSampleData(departments);
+
+            IEmployeeService sut = new EmployeeService(employees, departments);
+            var result = sut.GetEmployeesByDepartment(departmentId);
+            var hasEmployeeFromAnotherDepartment = result.Any(x => x.DepartmentId != departmentId);
+
+            Assert.False(hasEmployeeFromAnotherDepartment);
+        }
+
         private List<Department> CreateDepartmentSampleData()
         {
             return new List<Department>
