@@ -118,8 +118,85 @@ public class EmployeeService : IEmployeeService
 
 And finally, here is the new one (EFEmployeeService), that uses a database via EF. The EF prefix in the class name means Entity Framework.
 ```
+public class EFEmployeeService : IEmployeeService
+    {
+        private readonly DbSet<Employee> _employees;
+        private readonly DbSet<Department> _departments;
 
+        public EFEmployeeService(AppDbContext context)
+        {
+            _employees = context.Employees;
+            _departments = context.Departments;
+        }
+
+        private Task<IQueryable<Employee>> Query()
+        {
+            return Task.Run(() => from employee in _employees
+                   join department in _departments
+                   on employee.DepartmentId equals department.Id
+                   select new Employee
+                   {
+                       Id = employee.Id,
+                       DepartmentId = employee.DepartmentId,
+                       FirstName = employee.FirstName,
+                       LastName = employee.LastName,
+                       JobTitle = employee.JobTitle,
+                       Address = employee.Address,
+                       Department = department
+                   });
+        }
+
+        public IEnumerable GetAll()
+        {
+            return Query().Result.AsEnumerable();
+        }
+
+        public Task<EmployeesApiViewModel> GetAll(int page = 0, int recordsPerPage = 50)
+        {
+            //we dont want to send more than 250 records at time, TODO: make this configurable
+            recordsPerPage = Math.Min(recordsPerPage, 250);
+            return Task.FromResult(new EmployeesApiViewModel
+            {
+                Data = Query().Result.Skip(page * recordsPerPage).Take(recordsPerPage).ToList(),
+                Page = page,
+                RecordsPerPage = recordsPerPage,
+                TotalRecordCount = _employees.Count()
+            });
+        }
+
+        public Task<List<Employee>> GetEmployeesByDepartment(int departmentId)
+        {
+            var result = Task
+                .Run(
+                    () => Query().Result.Where(employee => employee.DepartmentId == departmentId).ToList()
+                );
+            return result;
+        }
+
+        public IList ListAll()
+        {
+            return Query().Result.ToList();
+        }
+    }
 ```
+
+### Application
+
+Question 6 said "sugget and apply". The apply part involved the creation of a Data Project. See it's [README](./VogCodeChallenge.Data/README.md) for more information. Another chunk of the "apply" is detailed in step-6 of the [Service Project README](./VogCodeChallenge.Services) where I create a new implementation of IEmployeeService.
+
+To complete the switch to using ab EF database we would have to add a connection string to the appsettings.json file in the API project
+
+```	
+	"ConnectionStrings": {
+		"AppDbConnection": "Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog={YourDatabaseNameHere}"
+	}
+```
+and inject the AppDbContext in the configure services method of the startup class of the API project, 
+```	
+	services.AddDbContext<AppDbContext>(options => 
+		options.UseSqlServer(Configuration.GetConnectionString("AppDbConnection")));
+```
+
 
 ## step-5
 Added docker support and docker compose support
