@@ -3,6 +3,37 @@
 Added in step-3, this contains the EmployeeService and the IEmployeeService. I added a helper Query function to 
 do the heavy lifting for GetAll and ListAll. That way, we reduce code duplication.
 
+## step-4
+
+### New Interface Methods
+
+For filtering employees by department GetEmployeesByDepartment(int departmentId) and for getting paged set of employees  GetAll(int page, int recordsPerPage). Here is our updated interface
+```
+     public interface IEmployeeService
+    {
+        IEnumerable GetAll();
+
+        IList ListAll();
+
+        IList<Employee> GetEmployeesByDepartment(int departmentId);
+        IList<Employee> GetAll(int page, int recordsPerPage);
+    }
+```
+
+### Changes to the EmployeeService class that implement the above
+
+```
+    public IList<Employee> GetEmployeesByDepartment(int departmentId)
+    {
+        return Query().Where(employee => employee.DepartmentId == departmentId).ToList();
+    }
+
+    public IList<Employee> GetAll(int page = 0, int recordsPerPage = 50)
+    {
+        return Query().Take(recordsPerPage).Skip(page*recordsPerPage).ToList();
+    }
+```
+
 ## IEmployeeService interface
 This is what the looks like
 
