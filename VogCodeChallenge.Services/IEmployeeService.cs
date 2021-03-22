@@ -11,6 +11,6 @@ namespace VogCodeChallenge.Services
         IList ListAll();
 
         IList<Employee> GetEmployeesByDepartment(int departmentId);
-        IList<Employee> GetAll(int page, int recordsPerPage);
+        dynamic GetAll(int page, int recordsPerPage);
     }
 }
