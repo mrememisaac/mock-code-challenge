@@ -15,7 +15,7 @@ namespace VogCodeChallenge.Entities
 
         public bool Equals([AllowNull] Employee other)
         {
-            return other != null && this.Id == other.Id;
+            return other != null && Id == other.Id;
         }
         
         public override bool Equals(object obj)
