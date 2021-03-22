@@ -1,4 +1,125 @@
-# Branches
+﻿# Branches
+
+## step-6
+Imagine we are connected to the Database now. We�d like to switch from in Memory implementation of Employee service to the database implementation. Suggest and apply a way to switch from your previous implementation to the new one and consider the methods you implemented before. IEnumerable<Employee> GetAll() and IList<Employee> ListAll() ** Database and Entity Framework implementation is not required
+
+### Suggestion
+Since we used an interface. We just need a new class that implements that interface but unlike the current one, 
+this class will contain logic for connecting to a real database. Once that class is ready, we just need to update 
+the startup class of the API project, telling it to use the new class (EFEmployeeService) instead of the old one (EmployeeService)
+
+For reference, here is the IEmployeeService interface
+```
+    public interface IEmployeeService
+    {
+        IEnumerable GetAll();
+
+        IList ListAll();
+
+        IList<Employee> GetEmployeesByDepartment(int departmentId);
+
+        EmployeesApiViewModel GetAll(int page, int recordsPerPage);
+    }
+```
+
+For reference, here is the in-memory EmployeeService (the old one)
+```
+public class EmployeeService : IEmployeeService
+    {
+        private readonly List<Department> _departments;
+        private readonly List<Employee> _employees;
+
+        public EmployeeService()
+        {
+            _departments = CreateSampleDepartments();
+            _employees = CreateSampleEmployees(_departments);
+        }
+
+        public EmployeeService(List<Employee> employees, List<Department> departments)
+        {
+            _departments = departments;
+            _employees = employees;
+        }
+
+        public IEnumerable GetAll()
+        {
+            return Query();
+        }
+
+        public IList ListAll()
+        {
+            return Query().ToList();
+        }
+
+        private IEnumerable<Employee> Query()
+        {
+            return from employee in _employees
+                   join department in _departments
+                   on employee.DepartmentId equals department.Id
+                   select new Employee
+                   {
+                       Id = employee.Id,
+                       DepartmentId = employee.DepartmentId,
+                       FirstName = employee.FirstName,
+                       LastName = employee.LastName,
+                       JobTitle = employee.JobTitle,
+                       Address = employee.Address,
+                       Department = department
+                   };
+        }
+
+        private List<Department> CreateSampleDepartments()
+        {
+            return new List<Department>
+            {
+                new Department{ Id = 1, Name ="Engineering", Address = "Developers Avenue"},
+                new Department{ Id=2, Name="Sales", Address="Sales Drive"}
+            };
+        }
+
+        private List<Employee> CreateSampleEmployees(List<Department> departments)
+        {
+            return new List<Employee>
+            {
+                new Employee
+                {
+                    Id =1, FirstName = "Emem", LastName="Isaac", JobTitle="Software Engineer", Address="4th Avenue", DepartmentId = departments.First().Id
+                },
+                new Employee
+                {
+                    Id =1, FirstName = "Kim", LastName="Doran", JobTitle="Software Engineer", Address="5th Avenue", DepartmentId = departments.First().Id
+                },
+                new Employee
+                {
+                    Id =1, FirstName = "Kim", LastName="Miran", JobTitle="Sales Executive", Address="6th Avenue", DepartmentId = departments.Last().Id
+                },
+            };
+        }
+
+        public IList<Employee> GetEmployeesByDepartment(int departmentId)
+        {
+            return Query().Where(employee => employee.DepartmentId == departmentId).ToList();
+        }
+
+        public EmployeesApiViewModel GetAll(int page = 0, int recordsPerPage = 50)
+        {
+            //we dont want to send more than 250 records at time, TODO: make this configurable
+            recordsPerPage = Math.Min(recordsPerPage, 250);
+            return new EmployeesApiViewModel
+            {
+                Data = Query().Skip(page * recordsPerPage).Take(recordsPerPage).ToList(),
+                Page = page,
+                RecordsPerPage=recordsPerPage, 
+                TotalRecordCount = _employees.Count
+            };
+        }
+    }
+```
+
+And finally, here is the new one (EFEmployeeService), that uses a database via EF. The EF prefix in the class name means Entity Framework.
+```
+
+```
 
 ## step-5
 Added docker support and docker compose support
