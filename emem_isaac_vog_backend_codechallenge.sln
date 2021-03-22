@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VogCodeChallenge.API", "Vog
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VogCodeChallenge.Entities", "VogCodeChallenge.Entities\VogCodeChallenge.Entities.csproj", "{F70EEA60-98E9-4EA8-A6F0-93BF8041D14A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VogCodeChallenge.Tests", "VogCodeChallenge.Tests\VogCodeChallenge.Tests.csproj", "{1B77E784-A28E-4D24-ACFE-66AB477795B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VogCodeChallenge.Tests", "VogCodeChallenge.Tests\VogCodeChallenge.Tests.csproj", "{1B77E784-A28E-4D24-ACFE-66AB477795B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VogCodeChallenge.Services", "VogCodeChallenge.Services\VogCodeChallenge.Services.csproj", "{1F3000EA-2528-4847-9C6E-F720F012BE36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VogCodeChallenge.Services", "VogCodeChallenge.Services\VogCodeChallenge.Services.csproj", "{1F3000EA-2528-4847-9C6E-F720F012BE36}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{ACB03CC0-A9C5-4625-B73D-9177C8B60E8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{1F3000EA-2528-4847-9C6E-F720F012BE36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F3000EA-2528-4847-9C6E-F720F012BE36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F3000EA-2528-4847-9C6E-F720F012BE36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACB03CC0-A9C5-4625-B73D-9177C8B60E8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACB03CC0-A9C5-4625-B73D-9177C8B60E8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACB03CC0-A9C5-4625-B73D-9177C8B60E8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACB03CC0-A9C5-4625-B73D-9177C8B60E8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
