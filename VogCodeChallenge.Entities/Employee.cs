@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace VogCodeChallenge.Entities
 {
-    public class Employee : EntityBase, IEntityBase
+    public class Employee : EntityBase, IEntityBase, IEquatable<Employee>
     {
         public string FirstName { get; set; }
 
@@ -12,5 +13,9 @@ namespace VogCodeChallenge.Entities
 
         public int DepartmentId { get; set; }
 
+        public bool Equals([AllowNull] Employee other)
+        {
+            return other != null && this.Id == other.Id;
+        }
     }
 }
