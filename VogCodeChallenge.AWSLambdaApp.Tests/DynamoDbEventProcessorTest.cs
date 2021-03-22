@@ -35,7 +35,9 @@ namespace VogCodeChallenge.AWSLambdaApp.Tests
                             NewImage = new Dictionary<string, AttributeValue> { { "field1", new AttributeValue { S = "NewValue" } }, { "field2", new AttributeValue { S = "AnotherNewValue" } } },
                             OldImage = new Dictionary<string, AttributeValue> { { "field1", new AttributeValue { S = "OldValue" } }, { "field2", new AttributeValue { S = "AnotherOldValue" } } },
                             StreamViewType = StreamViewType.NEW_AND_OLD_IMAGES
-                        }
+                        },
+                        EventID = "1",
+                        EventName = "Hello"
                     }
                 }
             };
@@ -47,7 +49,8 @@ namespace VogCodeChallenge.AWSLambdaApp.Tests
             function.Process(evnt, context);
 
             var testLogger = context.Logger as TestLambdaLogger;
-			Assert.Contains("Stream processing complete", testLogger.Buffer.ToString());
+            Assert.Contains("1", testLogger.Buffer.ToString());
+            Assert.Contains("Hello", testLogger.Buffer.ToString());
         }  
     }
 }
