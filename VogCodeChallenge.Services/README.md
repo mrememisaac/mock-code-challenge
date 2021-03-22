@@ -5,19 +5,19 @@ The EmployeeService, EFEmployeeService and the IEmployeeService live here
 
 The following changes are required to fulfill the requirements in step-6
 
-1.    Reference the VogCodeChallenge.Data project from the VogCodeChallenge.Services project
-2.    Create a new EmployeeService class, let's call it EFEmployeeService - the EF meaning Entity Framework. It must implement the interface IEmployee
-3.    Add a readonly field of type DbSet<Employee>. We'll call it _employees.
-3.    Add a readonly field of type DbSet<Departments>. We'll call it _departments.
-4.    Provide a constructor that accepts a dbContext
-5.    In the constructor method, do this
-          a. _departments = dbContext.Departments
-          b. _employees = dbContext.Employees
-          c. Create a Query() method with a return type of Task<IQueryAble<Employee>>
-          d. Create a GetAll() method that returns Query().Result.AsEnumerable();
-          e. Create a ListAll() method that returns Query().Result.ToList();
-          f. Create a GetEmployeesByDepartment method that returns Task<List<Employee>>
-          g. Create a GetAll(page, recordsPerpage) method that returns Task<EmployeeApiViewModel>
+1. Reference the VogCodeChallenge.Data project from the VogCodeChallenge.Services project
+2. Create a new EmployeeService class, let's call it EFEmployeeService - the EF meaning Entity Framework. It must implement the interface IEmployee
+3. Add a readonly field of type DbSet<Employee>. We'll call it _employees.
+3. Add a readonly field of type DbSet<Departments>. We'll call it _departments.
+4. Provide a constructor that accepts a dbContext
+5. In the constructor method, do this
+    - _departments = dbContext.Departments
+    - _employees = dbContext.Employees
+    - Create a Query() method with a return type of Task<IQueryAble<Employee>>
+    - Create a GetAll() method that returns Query().Result.AsEnumerable();
+    - Create a ListAll() method that returns Query().Result.ToList();
+    - Create a GetEmployeesByDepartment method that returns Task<List<Employee>>
+    - Create a GetAll(page, recordsPerpage) method that returns Task<EmployeeApiViewModel>
 
 Now that we will be working databases, I have modified the IEmployee interface and Employee Service to return Task types, resulting in v4.1, v5.1
 
