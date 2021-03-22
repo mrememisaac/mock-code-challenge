@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VogCodeChallenge.Entities;
 using VogCodeChallenge.Services;
 
 namespace VogCodeChallenge.API.Controllers
@@ -25,6 +26,20 @@ namespace VogCodeChallenge.API.Controllers
         private ObjectResult ServerError(string message = "Service unreachable")
         {
             return StatusCode(StatusCodes.Status500InternalServerError, message);
+        }
+
+        [HttpGet]
+        public ActionResult<List<Employee>> Get() 
+        {
+            try
+            {
+                return Ok(_employeeService.GetAll());
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message, e);
+                return ServerError();
+            }
         }
     }
 }
