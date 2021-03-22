@@ -18,5 +18,10 @@ namespace VogCodeChallenge.Entities
         {
             return other != null && Id == other.Id;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Department department && Equals(department);
+        }
     }
 }
