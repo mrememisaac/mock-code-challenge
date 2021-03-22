@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using VogCodeChallenge.Entities;
 
 namespace VogCodeChallenge.Services
 {
@@ -7,5 +9,7 @@ namespace VogCodeChallenge.Services
         IEnumerable GetAll();
 
         IList ListAll();
+
+        IList<Employee> GetEmployeesByDepartment(int departmentId);
     }
 }
