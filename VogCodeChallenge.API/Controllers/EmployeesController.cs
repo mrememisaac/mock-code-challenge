@@ -26,7 +26,7 @@ namespace VogCodeChallenge.API.Controllers
         }
 
         [HttpGet()]
-        public ActionResult Get(int page, int recordsPerPage = 50)
+        public ActionResult<EmployeesApiViewModel> Get(int page, int recordsPerPage = 50)
         {
             try
             {
