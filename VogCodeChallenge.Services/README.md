@@ -23,16 +23,30 @@ For filtering employees by department GetEmployeesByDepartment(int departmentId)
 ### Changes to the EmployeeService class that implement the above
 
 ```
-    public IList<Employee> GetEmployeesByDepartment(int departmentId)
+    public Task<List<Employee>> GetEmployeesByDepartment(int departmentId)
     {
-        return Query().Where(employee => employee.DepartmentId == departmentId).ToList();
+        var result = Task
+            .Run(
+                () => Query().Where(employee => employee.DepartmentId == departmentId).ToList()
+            );
+        return result;
     }
 
-    public IList<Employee> GetAll(int page = 0, int recordsPerPage = 50)
+    public Task<EmployeesApiViewModel> GetAll(int page = 0, int recordsPerPage = 50)
     {
-        return Query().Take(recordsPerPage).Skip(page*recordsPerPage).ToList();
+        //we dont want to send more than 250 records at time, TODO: make this configurable
+        recordsPerPage = Math.Min(recordsPerPage, 250);
+        return Task.FromResult(new EmployeesApiViewModel
+        {
+            Data = Query().Skip(page * recordsPerPage).Take(recordsPerPage).ToList(),
+            Page = page,
+            RecordsPerPage=recordsPerPage, 
+            TotalRecordCount = _employees.Count
+        });
     }
 ```
+
+#step 3
 
 ## IEmployeeService interface
 This is what the looks like
