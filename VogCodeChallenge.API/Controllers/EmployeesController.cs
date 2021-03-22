@@ -41,5 +41,20 @@ namespace VogCodeChallenge.API.Controllers
                 return ServerError();
             }
         }
+
+
+        [HttpGet("department/{departmentId:int}")]
+        public ActionResult<Employee> Get(int departmentId)
+        {
+            try
+            {
+                return Ok(_employeeService.GetEmployeesByDepartment(departmentId));
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message, e);
+                return ServerError();
+            }
+        }
     }
 }
